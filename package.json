@@ -1,0 +1,22 @@
+{
+  "name": "vidon",
+  "version": "1.0.0",
+  "description": "app to creat videos ideas\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/shymaSane/VidON.git"
+  },
+  "author": "Shyma Al-Sane",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shymaSane/VidON/issues"
+  },
+  "homepage": "https://github.com/shymaSane/VidON#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
