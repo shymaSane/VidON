@@ -11,10 +11,7 @@ app.set('view engine', 'handlebars');
 //Home
 app.get('/', (req, res) => {
     //we can add dynmaic variables to handlebars
-    const title = "welcome home"
-    res.render('home', {
-        head: title
-    })
+    res.render('home')
 })
 
 //About Route
