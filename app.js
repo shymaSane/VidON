@@ -1,25 +1,27 @@
 const express = require ('express');
 const app = express();
+const exphbs = require('express-handlebars')
 const port = 5000;
 
-//using middleware:
 
-app.use((req, res, next) => {
-    req.name = "shyma al sane";
-    next();
-})
+//add handlebars-express middleware
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
-//Index Route
-//when ever we add sth new we need to restart the server>>> so you have to install nodemon and it ll restat automatically 
+//Home
 app.get('/', (req, res) => {
-    console.log(req.name)
-    res.send('Index!!!!')
+    //we can add dynmaic variables to handlebars
+    const title = "welcome home"
+    res.render('home', {
+        head: title
+    })
 })
 
 //About Route
 app.get('/about', (req, res) => {
-    res.send('ABOUT!!!!')
+    res.render('about')
 })
+
 
 app.listen(port, () => {
     console.log(`starting on port number ${port}`)
