@@ -9,9 +9,14 @@
     <title>VidOn</title>
 </head>
 <body>
-    {{{header}}}
+    {{!-- navbar partials --}}
+    {{> _navbar}}
+
     {{!-- this ll ouput whatever views being loaded --}}
-    {{{body}}}
+    <div class="container">
+        {{{body}}}
+    </div>
+    
 
     {{!-- bootstrap config --}}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
