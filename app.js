@@ -36,6 +36,10 @@ app.get('/about', (req, res) => {
     res.render('about')
 })
 
+//add ideas
+app.get('/ideas/add', (req, res) => {
+    res.render('add')
+})
 
 app.listen(port, () => {
     console.log(`starting on port number ${port}`)
