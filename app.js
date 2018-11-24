@@ -1,14 +1,20 @@
 const express = require ('express');
-const app = express();
 const exphbs = require('express-handlebars')
 const port = 5000;
 const mongoose = require('mongoose');
 
-//connect mongoose to mongodb
-const mongoDB = 'mongodb://127.0.0.1/my_database';
-mongoose.connect(mongoDB)
+//entry file 
+const app = express();
 
-//use the global promise library
+
+//connect mongoose to mongodb(can be remote or local)
+mongoose.connect('mongodb://localhost/my_database', {
+    //we add this to  show DeprecationWarning: `open()` is deprecated in mongoose
+    useMongoClient: true
+}).then(() => console.log('connected'))
+.catch(err => console.log(err))
+
+//use the global promise library or you ll get deprecation warning mpromise
 mongoose.Promise = global.Promise;
 
 //get default connection
