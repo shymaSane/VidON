@@ -49,6 +49,8 @@ app.get('/ideas/add', (req, res) => {
 //post form request(note form wont pst if it was empty so we need t add validation):
 app.post('/ideas', (req,res) =>{
     let errors = []
+    let title = req.body.title
+    let detailes = req.body.detailes
     if(!req.body.title){
         errors.push('Title is missing! please enter your title.')
     }
@@ -60,11 +62,17 @@ app.post('/ideas', (req,res) =>{
         res.render('add', {
             //note we get name of fieldes from name attribute in add.handlebras
             errors,
-            title: req.body.title,
-            detailes: req.body.detailes
+            title,
+            detailes
         })
     } else {
-        console.log(req.body)
+        //create instance from model Idea
+        const newIdea = new Idea({
+           title,
+           detailes 
+        })
+        newIdea.save()
+        .then(err => console.log(err))
         res.redirect('/ideas')
     }
 
