@@ -56,6 +56,11 @@ app.get('/ideas', (req,res) => {
     })
 })
 
+app.delete('/ideas/delete/:id', (res, req) => {
+    const id = req.params.id
+    console.log(id)
+})
+
 //post form request(note form wont pst if it was empty so we need t add validation):
 app.post('/ideas', (req,res) =>{
     let errors = []

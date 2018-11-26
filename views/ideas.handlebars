@@ -1,14 +1,23 @@
 <div class="container">
     {{#each ideas}}
-    <div class="card bg-light text-blue border-primary m-2">
+    <div class="card bg-light text-blue border-primary mx-2 my-3">
         <div class="card-body">
-            <h5 class="card-title">
+            <div class="card-header">
+                <h6 class="card-title">
                 {{this.title}}
-            </h5>
-            <p class="card-text">
+                <spna>
+                    <a href="/ideas/delete/{{this._id}}" class="d-inline float-right px-2"><i class="fas fa-times"></i></a>
+                    <a href="#" class="d-inline float-right px-2"><i class="fas fa-pencil-alt"></i></a>
+                </spna>
+            </h6>
+            </div>
+            <p class="card-text pt-2 px-1">
                 {{this.detailes}}
             </p>
         </div>
     </div>
+    {{else}}
+    <p class="lead">There is no ideas added.</p>
     {{/each}}
 </div>
+
