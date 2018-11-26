@@ -56,9 +56,15 @@ app.get('/ideas', (req,res) => {
     })
 })
 
-app.delete('/ideas/delete/:id', (res, req) => {
-    const id = req.params.id
-    console.log(id)
+app.get('/ideas/edit/:id', (req, res) => {
+    const query = req.params.id;
+    Idea.find({_id: query})
+    .then(idea => {
+        res.render('ideas', {
+            idea
+        })
+    })
+    
 })
 
 //post form request(note form wont pst if it was empty so we need t add validation):
