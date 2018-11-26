@@ -46,6 +46,16 @@ app.get('/ideas/add', (req, res) => {
     res.render('add')
 })
 
+//fetch ideas from mogodb and show them
+app.get('/ideas', (req,res) => {
+    Idea.find({})
+    .then(ideas => {
+        res.render('ideas',{
+            ideas
+        })
+    })
+})
+
 //post form request(note form wont pst if it was empty so we need t add validation):
 app.post('/ideas', (req,res) =>{
     let errors = []
@@ -77,6 +87,9 @@ app.post('/ideas', (req,res) =>{
     }
 
 })
+
+
+
 
 app.listen(port, () => {
     console.log(`starting on port number ${port}`)
