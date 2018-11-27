@@ -2,11 +2,15 @@ const express = require ('express');
 const exphbs = require('express-handlebars')
 const port = 5000;
 const mongoose = require('mongoose');
+var methodOverride = require('method-override')
 //body parser for the from
 const bodyParser = require('body-parser')
 
 //entry file 
 const app = express();
+
+// override with POST having ?_method=PUT
+app.use(methodOverride('_method'))
 
 //body parser middleware>> without body parser we wnt be able to get request body for form
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -56,16 +60,21 @@ app.get('/ideas', (req,res) => {
     })
 })
 
+//grab idea to edit with certain id
 app.get('/ideas/edit/:id', (req, res) => {
     const query = req.params.id;
-    Idea.find({_id: query})
+    console.log(query)
+    //find returns array with the results in it
+    Idea.findOne({_id: query})
     .then(idea => {
-        res.render('ideas', {
+        console.log(idea)
+        res.render('edit', {
             idea
         })
     })
     
 })
+
 
 //post form request(note form wont pst if it was empty so we need t add validation):
 app.post('/ideas', (req,res) =>{
@@ -99,7 +108,13 @@ app.post('/ideas', (req,res) =>{
 
 })
 
+//form put request 
 
+app.put('/ideas/:id', (req, res) => {
+    Idea.update({_id: req.params.id}, req.body)
+    .then(err => console.log(err))
+    res.redirect('/ideas')
+})
 
 
 app.listen(port, () => {

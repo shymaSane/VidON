@@ -20,4 +20,6 @@ const IdeasSchema = new Schema({
 mongoose.model('Ideas', IdeasSchema);
 
 ///NOTE:
-//to run mongo shell: type mongo --shell in cmd line after cd to bin file
+//first  run mongod.exe
+//open new cmd window run net start mongodb
+//then run monog
