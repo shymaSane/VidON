@@ -112,10 +112,17 @@ app.post('/ideas', (req,res) =>{
 
 app.put('/ideas/:id', (req, res) => {
     Idea.update({_id: req.params.id}, req.body)
-    .then(err => console.log(err))
-    res.redirect('/ideas')
+    .then(() => res.redirect('/ideas') )
+    
 })
 
+//delete idea 
+app.delete('/ideas/:id', (req, res) => {
+    Idea.remove({_id: req.params.id})
+    .then( () => res.redirect('/ideas'))
+    
+
+})
 
 app.listen(port, () => {
     console.log(`starting on port number ${port}`)

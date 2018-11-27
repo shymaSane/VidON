@@ -6,8 +6,13 @@
                 <h6 class="card-title">
                 {{this.title}}
                 <spna>
-                    <a href="#" class="d-inline float-right px-2"><i class="fas fa-times"></i></a>
-                    <a href="/ideas/edit/{{this._id}}" class="d-inline float-right px-2"><i class="fas fa-pencil-alt"></i></a>
+                    <form action="/ideas/{{this._id}}?_method=DELETE" method="POST" class="d-inline float-right">
+                          <button type="submit" class="btn btn-link">
+                              <i class="fas fa-times"></i>
+                          </button>
+                    </form>
+                    
+                    <a href="/ideas/edit/{{this._id}}" class="btn btn-link float-right"><i class="fas fa-pencil-alt"></i></a>
                 </spna>
             </h6>
             </div>
@@ -17,7 +22,7 @@
         </div>
     </div>
     {{else}}
-    <p class="lead">There is no ideas added.</p>
+    <p class="lead m-5">There is no ideas added.</p>
     {{/each}}
 </div>
 
