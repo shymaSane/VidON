@@ -19,8 +19,7 @@ const app = express();
 const ideas = require('./routes/ideas')
 const users = require('./routes/users')
 
-app.use('/', ideas)
-app.use('/', users)
+
 //middleware for flash messaging 
 app.use(session({
     secret: 'secret',
@@ -72,6 +71,9 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about')
 })
+
+app.use('/', ideas)
+app.use('/', users)
 
 
 

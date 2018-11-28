@@ -16,12 +16,12 @@ router.get('/ideas', (req,res) => {
 })
 
 //add ideas
-router.get('/ideas/add', (req, res) => {
+router.get('/ideas/add_idea', (req, res) => {
     res.render('add')
 })
 
 //grab idea to edit with certain id
-router.get('ideas/edit/:id', (req, res) => {
+router.get('/ideas/edit/:id', (req, res) => {
     const query = req.params.id;
     console.log(query)
     //find returns array with the results in it
