@@ -15,17 +15,18 @@ const app = express();
 //middleware for flash messaging 
 app.use(session({
     secret: 'secret',
-    resave: true,
+    resave: false,
     saveUninitialized: true
   }))
 
 app.use(flash())
 
 //global variables
-app.use((req, res) => {
+app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('erorr');
+    next()
 })
 
 // override with POST having ?_method=PUT
