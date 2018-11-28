@@ -1,4 +1,5 @@
 const express = require ('express');
+const path = require('path')
 const exphbs = require('express-handlebars');
 const port = 5000;
 const mongoose = require('mongoose');
@@ -18,7 +19,8 @@ const app = express();
 const ideas = require('./routes/ideas')
 const users = require('./routes/users')
 
-
+app.use('/', ideas)
+app.use('/', users)
 //middleware for flash messaging 
 app.use(session({
     secret: 'secret',
@@ -51,8 +53,8 @@ mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true })
 //use the global promise library or you ll get deprecation warning mpromise
 mongoose.Promise = global.Promise;
 
-
-
+//to use static files:
+app.use(express.static(path.join(__dirname + '/public')));
 
 //add handlebars-express middleware
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -71,8 +73,7 @@ app.get('/about', (req, res) => {
     res.render('about')
 })
 
-app.use('/ideas', ideas)
-app.use('/users', users)
+
 
 app.listen(port, () => {
     console.log(`starting on port number ${port}`)

@@ -6,7 +6,7 @@ require('../models/Ideas')
 const Idea = mongoose.model('Ideas')
 
 //fetch ideas from mogodb and show them
-router.get('/', (req,res) => {
+router.get('/ideas', (req,res) => {
     Idea.find({})
     .then(ideas => {
         res.render('ideas',{
@@ -16,12 +16,12 @@ router.get('/', (req,res) => {
 })
 
 //add ideas
-router.get('/add', (req, res) => {
+router.get('/ideas/add', (req, res) => {
     res.render('add')
 })
 
 //grab idea to edit with certain id
-router.get('/edit/:id', (req, res) => {
+router.get('ideas/edit/:id', (req, res) => {
     const query = req.params.id;
     console.log(query)
     //find returns array with the results in it
@@ -36,7 +36,7 @@ router.get('/edit/:id', (req, res) => {
 })
 
 //post form request(note form wont pst if it was empty so we need t add validation):
-router.post('/', (req,res) =>{
+router.post('/ideas', (req,res) =>{
     let errors = []
     let title = req.body.title
     let detailes = req.body.detailes
@@ -72,7 +72,7 @@ router.post('/', (req,res) =>{
 
 //form put request 
 
-router.put('/:id', (req, res) => {
+router.put('/ideas/:id', (req, res) => {
     Idea.update({_id: req.params.id}, req.body)
     .then(() => {
         req.flash('success_msg', 'Video Idea has been updated successfuly')
@@ -81,7 +81,7 @@ router.put('/:id', (req, res) => {
 })
 
 //delete idea 
-router.delete('/:id', (req, res) => {
+router.delete('/ideas/:id', (req, res) => {
     Idea.remove({_id: req.params.id})
     .then( () => {
         req.flash('success_msg', 'Video Idea has been deleted successfuly')
