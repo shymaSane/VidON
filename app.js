@@ -2,12 +2,31 @@ const express = require ('express');
 const exphbs = require('express-handlebars')
 const port = 5000;
 const mongoose = require('mongoose');
-var methodOverride = require('method-override')
+const methodOverride = require('method-override')
+const flash = require('connect-flash');
 //body parser for the from
 const bodyParser = require('body-parser')
+const session = require('express-session')
+
 
 //entry file 
 const app = express();
+
+//middleware for flash messaging 
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  }))
+
+app.use(flash())
+
+//global variables
+app.use((req, res) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('erorr');
+})
 
 // override with POST having ?_method=PUT
 app.use(methodOverride('_method'))
@@ -102,8 +121,11 @@ app.post('/ideas', (req,res) =>{
            detailes 
         })
         newIdea.save()
-        .then(err => console.log(err))
-        res.redirect('/ideas')
+        .then(() => {
+            req.flash('success_msg', 'Video Idea has been added successfuly')
+            res.redirect('/ideas')
+        })
+        
     }
 
 })
@@ -112,16 +134,19 @@ app.post('/ideas', (req,res) =>{
 
 app.put('/ideas/:id', (req, res) => {
     Idea.update({_id: req.params.id}, req.body)
-    .then(() => res.redirect('/ideas') )
-    
+    .then(() => {
+        req.flash('success_msg', 'Video Idea has been updated successfuly')
+        res.redirect('/ideas') 
+    })
 })
 
 //delete idea 
 app.delete('/ideas/:id', (req, res) => {
     Idea.remove({_id: req.params.id})
-    .then( () => res.redirect('/ideas'))
-    
-
+    .then( () => {
+        req.flash('success_msg', 'Video Idea has been deleted successfuly')
+        res.redirect('/ideas')
+    })
 })
 
 app.listen(port, () => {
