@@ -1,12 +1,5 @@
 
 <div class="container h-100 mt-5">
-    {{#if errors}}
-        {{#each errors}}
-            <div class="alert alert-danger mx-5 my-1" role="alert">
-                {{this}}
-            </div>
-        {{/each}}
-    {{/if}}
     <div class="row my-auto mx-auto px-5"> 
         <div class="card card-body border-primary bg-light text-primary">
             <form action="/ideas" method="post">
