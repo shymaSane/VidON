@@ -27,7 +27,7 @@ router.get('/ideas/edit/:id', (req, res) => {
     //find returns array with the results in it
     Idea.findOne({_id: query})
     .then(idea => {
-        console.log(idea)
+       
         res.render('edit', {
             idea
         })
