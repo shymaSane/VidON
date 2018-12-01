@@ -8,9 +8,8 @@ const flash = require('connect-flash');
 //body parser for the from
 const bodyParser = require('body-parser');
 const session = require('express-session');
-//passpost setup
 const passport = require('passport');
-const Strategy = require('passport-local').Strategy;
+
 
 //entry file 
 const app = express();
@@ -19,13 +18,13 @@ const app = express();
 const ideas = require('./routes/ideas')
 const users = require('./routes/users')
 
-
+require('./config/passport')(passport)
 //middleware for flash messaging 
 app.use(session({
     secret: 'secret',
-    resave: false,
-    saveUninitialized: true
-  }))
+    saveUninitialized: true,
+    resave: true
+  }));
 
 app.use(flash())
 
@@ -59,16 +58,24 @@ app.use(express.static(path.join(__dirname + '/public')));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+// Passport init
+app.use(passport.initialize());
+app.use(passport.session());
+
 //Create, Read, Update and Delete (CRUD) operations
 
 //Home
 app.get('/', (req, res) => {
     //we can add dynmaic variables to handlebars
+    //this ll print the session id when ever we visited our home page
+    console.log(req.sessionID)
     res.render('home')
 })
 
 //About Route
 app.get('/about', (req, res) => {
+    //this ll print the same number for home page session
+    console.log(req.sessionID)
     res.render('about')
 })
 
