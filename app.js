@@ -26,13 +26,21 @@ app.use(session({
     resave: true
   }));
 
+// Passport init
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash())
 
 //global variables
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
+    //errors coming from passport
     res.locals.error = req.flash('error');
+    //coming after logging in:
+    res.locals.user = req.user || null
+    console.log(req.user)
     next()
 })
 
@@ -58,9 +66,7 @@ app.use(express.static(path.join(__dirname + '/public')));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-// Passport init
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 //Create, Read, Update and Delete (CRUD) operations
 

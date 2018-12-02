@@ -17,25 +17,31 @@
                 
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item d-flex">
-                    <span class="text-white m-0 login-img my-auto"><i class="fas fa-sign-in-alt"></i></span>
-                    <a class="nav-link" href="/users/login">Login</a>
-                </li>
-                <li class="nav-item d-flex">
-                    <span class="text-white m-0 login-img my-auto"><i class="fas fa-sign-in-alt"></i></span>
-                    <a class="nav-link" href="/users/register">register</a>
-                </li>
+                {{#if user}}
+                    <li class="nav-item d-flex">
+                        <span class="text-white m-0 login-img my-auto"><i class="fas fa-sign-in-alt"></i></span>
+                        <a class="nav-link" href="/users/logout">Logout</a>
+                    </li>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Video Ideas
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/ideas">Ideas</a>
+                            <a class="dropdown-item" href="/ideas/add_idea">Add Ideas</a>
+                        </div>
+                    </div>
+                {{else}}
+                    <li class="nav-item d-flex">
+                        <span class="text-white m-0 login-img my-auto"><i class="fas fa-sign-in-alt"></i></span>
+                        <a class="nav-link" href="/users/login">Login</a>
+                    </li>
+                    <li class="nav-item d-flex">
+                        <span class="text-white m-0 login-img my-auto"><i class="fas fa-sign-in-alt"></i></span>
+                        <a class="nav-link" href="/users/register">register</a>
+                    </li>
+                {{/if}}
             </ul>
-        </div>
-
-         <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Video Ideas
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/ideas">Ideas</a>
-                <a class="dropdown-item" href="/ideas/add_idea">Add Ideas</a>
-            </div>
         </div>
     </div>
 </nav>
